@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -45,11 +46,15 @@ public class Practice14GetFontMetricsView extends View {
         // 这种居中算法的优点是，可以让不同的文字的 baseline 对齐
 
         int middle = (top + bottom) / 2;
-        canvas.drawText(texts[0], 100, middle, paint2);
-        canvas.drawText(texts[1], 200, middle, paint2);
-        canvas.drawText(texts[2], 300, middle, paint2);
-        canvas.drawText(texts[3], 400, middle, paint2);
-        canvas.drawText(texts[4], 500, middle, paint2);
-        canvas.drawText(texts[5], 600, middle, paint2);
+        canvas.drawText(texts[0], 100, middle+getMiddleExtra(texts[0]), paint2);
+        canvas.drawText(texts[1], 200, middle+getMiddleExtra(texts[1]), paint2);
+        canvas.drawText(texts[2], 300, middle+getMiddleExtra(texts[2]), paint2);
+        canvas.drawText(texts[3], 400, middle+getMiddleExtra(texts[3]), paint2);
+        canvas.drawText(texts[4], 500, middle+getMiddleExtra(texts[4]), paint2);
+        canvas.drawText(texts[5], 600, middle+getMiddleExtra(texts[5]), paint2);
+    }
+    private float getMiddleExtra(String text){
+        Paint.FontMetrics fontMetrics = paint2.getFontMetrics();
+        return -(fontMetrics.descent+fontMetrics.ascent)/2;
     }
 }
